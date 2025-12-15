@@ -1,0 +1,476 @@
+﻿Introduction to machine learning concepts
+Introduction
+
+
+ML in many ways is an intersection between Data Science and Software Engineering. The goal of ML is to use data to create a predictive model that can be incorporated into software applications or service
+The fundamental idea of ML is to use the past data to predict the unknown outcomes or values
+
+
+Fundamentally a ML model is a software application that encapsulates a function to calculate an output value based on one or more input values. The process of defining that function is known as training. After the function has been defined, you can use it to predict new values in a process called inferencing.
+
+
+The training data consists of past observations. In most cases, the observations include the observed attributes or features of the thing being observed, and the known value of the thing you want to train a model to predict (known as the label).
+Label → what we predict, also called as target, output, y
+Features → what we use to predict it, also called as predictors, independent variables or x
+
+
+Example →
+In the medical scenario, the goal is to predict whether or not a patient is at risk of diabetes based on their clinical measurements. The patient's measurements (weight, blood glucose level, and so on) are the features (x), and the likelihood of diabetes (for example, 1 for at risk, 0 for not at risk) is the label (y).
+
+
+An algorithm is applied to the data to determine the relationship between the features and labels and generalize that relationship as a calculation that can be performed on x to calculate y
+The result of the algorithm is a model that encapsulates the calculation derived by the algorithm as a function - let's call it f. In mathematical notation:
+y = f(x)
+
+
+Now that the training phase is complete, the trained model can be used for inferencing. The model is essentially a software program that encapsulates the function produced by the training process. You can input a set of feature values, and receive as an output a prediction of the corresponding label. Because the output from the model is a prediction that was calculated by the function, and not an observed value, you'll often see the output from the function shown as ŷ (which is rather delightfully verbalized as "y-hat").
+
+
+Types of ML Models
+  
+
+
+
+Supervised ML → Where we have both features and labels in the training data. Supervised machine learning is used to train models by determining a relationship between the features and labels in past observations, so that unknown labels can be predicted for features in future cases.
+
+
+Regression is a form of supervised ML in which the label that we predict is a numeric value, for instance, the number of ice creams sold on a given day, based on the temperature, rainfall, and windspeed.
+
+
+Classification is a form of supervised ML in which the label represents a categorization or class.
+Two types Binary and Multiclass
+Binary Classification → Binary classification models predict one of two mutually exclusive outcomes
+For example → Whether a patient is at risk for diabetes based on clinical metrics like weight, age, blood glucose level, and so on
+The model predicts a binary true/false or positive/negative prediction for a single possible class.
+
+
+Multiclass classification extends binary classification to predict a label that represents one of multiple possible classes. For example,
+The species of a penguin (Adelie, Gentoo, or Chinstrap) based on its physical measurements.
+The genre of a movie (comedy, horror, romance, adventure, or science fiction) based on its cast, director, and budget.
+In most scenarios that involve a known set of multiple classes, multiclass classification is used to predict mutually exclusive labels. For example, a penguin can't be both a Gentoo and an Adelie. However, there are also some algorithms that you can use to train multilabel classification models, in which there may be more than one valid label for a single observation. For example, a movie could potentially be categorized as both science fiction and comedy.
+
+
+Unsupervised machine learning involves training models using data that consists only of feature values without any known labels. Unsupervised machine learning algorithms determine relationships between the features of the observations in the training data.
+The most common form of unsupervised machine learning is clustering. A clustering algorithm identifies similarities between observations based on their features, and groups them into discrete clusters. 
+For example:
+Group similar flowers based on their size, number of leaves, and number of petals.
+Identify groups of similar customers based on demographic attributes and purchasing behavior.
+
+
+Regression
+  
+
+Regression models are trained to predict numeric label values based on training data that includes both features and known labels. The process for training a regression model (or indeed, any supervised machine learning model) involves multiple iterations in which you use an appropriate algorithm (usually with some parameterized settings) to train a model, evaluate the model's predictive performance, and refine the model by repeating the training process with different algorithms and parameters until you achieve an acceptable level of predictive accuracy.
+
+
+The diagram shows four key elements of the training process for supervised machine learning models:
+
+
+Split the training data (randomly) to create a dataset with which to train the model while holding back a subset of the data that you'll use to validate the trained model.
+Use an algorithm to fit the training data to a model. In the case of a regression model, use a regression algorithm such as linear regression.
+Use the validation data you held back to test the model by predicting labels for the features.
+Compare the known actual labels in the validation dataset to the labels that the model predicted. Then aggregate the differences between the predicted and actual label values to calculate a metric that indicates how accurately the model predicted for the validation data.
+After each train, validate, and evaluate iteration, you can repeat the process with different algorithms and parameters until an acceptable evaluation metric is achieved.
+
+
+In ML training, parameters = internal values the model learns from data.
+They are not set by you — they are learned during training.
+Linear Regression
+Parameters = weights (𝑤) and bias (𝑏)
+The model learns:
+y=w1​x1​+w2​x2​+...+b
+Parameters = the learned internal knobs that minimize error.
+Hyperparameters = the settings YOU adjust (learning rate, number of trees, regularization)
+
+
+Simple Analogy
+Imagine you're teaching someone math.
+
+
+Hyperparameters = Your teaching strategy
+How fast you teach (learning rate)
+How many days you teach (epochs)
+Class size (batch size)
+
+
+Parameters = What the student actually learns
+Their knowledge (weights)
+Their understanding (bias)
+
+
+Example - Regression
+We want to predict the ice-cream sales based on the temp of the day. Lets say we have some historical data which shows the sales and the temp of the day. We split the data into test and train and then use an algorithm like linear regression to find out the relationship between the feature(x) and the label(y).
+Once we have the relationship or basically a function we can then check with our test data how accurate are the results and how far the actuals are vs the predicted values.
+We also have certain metrics to check the actuals(y) vs the predicted(y hat) and below are few common metrics
+
+
+Mean Absolute Error → This metric gives an average of the absolute variance from the actuals label. It doesn't matter if the variance is positive or negative it takes the absolute error for each prediction and then takes the average
+
+
+Mean Squared Error → This metric helps to amplify the larger errors by squaring them and sometimes metrics like this shows how well the errors are smoothened. If the MSE is low it doesnt not mean the curve is smooth it just states that the predictions are closer to average.
+MSE doesnt tell the frequency of errors but it tells the average size of errors, if the error is high the MSE will have a good spike due to squaring of the error.
+MSE measures magnitude of error (with emphasis on large errors).
+It DOES NOT tell you “smoothness,” “frequency,” or “distribution” of errors.
+
+
+Root Mean Squared Error → MSE measures average squared error, which emphasizes large errors, but the squaring changes the scale. MSE is in squared units, so to interpret error in the same units as the label, we take the square root → RMSE.
+
+
+Coefficient of Determination → R^2 → It measures the Proportion of variance in the actual target values that the model can explain.
+It compares the sum of squared differences between predicted and actual labels with the sum of squared differences between the actual label values and the mean of actual label values, like this:
+R2 = 1- ∑(y-ŷ)2 ÷ ∑(y-ȳ)2
+Numerator = model error (SSE: Sum of Squared Errors)
+Denominator = baseline error (SST: Total Sum of Squares)
+If your model is better than the mean → R² goes closer to 1
+If worse → R² becomes negative
+
+
+The metrics described above are commonly used to evaluate a regression model. In most real-world scenarios, a data scientist will use an iterative process to repeatedly train and evaluate a model, varying:
+
+
+Feature selection and preparation (choosing which features to include in the model, and calculations applied to them to help ensure a better fit).
+Algorithm selection (We explored linear regression in the previous example, but there are many other regression algorithms)
+Algorithm parameters (numeric settings to control algorithm behavior, more accurately called hyperparameters to differentiate them from the x and y parameters).
+After multiple iterations, the model that results in the best evaluation metric that's acceptable for the specific scenario is selected.
+
+
+Classification
+Classification like regression is a supervised learning method and so it follows the same iterative path of training, validating and evaluating models.
+Instead of calculating numeric values like a regression model, the algorithms used to train classification models calculate probability values for class assignment and the evaluation metrics used to assess model performance compare the predicted classes to the actual classes.
+Binary Classification algorithms are used to train a model that predicts one of the two possible labels for a single class, essentially predicting True or False
+
+
+Lets take an example where we have a dataset of blood sugar level and diabetics yes/no
+We have a feature x called Blood Sugar Level and a label y which says 1 or 0 where 1 being diabetics Yes and 0 being diabetics No
+To train the model, we'll use an algorithm to fit the training data to a function that calculates the probability of the class label being true (in other words, that the patient has diabetes). Probability is measured as a value between 0.0 and 1.0, such that the total probability for all possible classes is 1.0. So for example, if the probability of a patient having diabetes is 0.7, then there's a corresponding probability of 0.3 that the patient isn't diabetic.
+
+
+There are many algorithms that can be used for binary classification, such as logistic regression, which derives a sigmoid (S-shaped) function with values between 0.0 and 1.0, like this:
+  
+
+Despite its name, in machine learning logistic regression is used for classification, not regression. The important point is the logistic nature of the function it produces, which describes an S-shaped curve between a lower and upper value (0.0 and 1.0 when used for binary classification).
+
+
+We can see that for three observations the value of y is true and so the probability is 1 and similarly for rest three observations the value of y is false and so the probability is 0
+The S-shaped curve describes the probability distribution so that plotting a value of x on the line identifies the corresponding probability that y is 1. Here we are concerned only about the fact that we want the probability of y as 1, y can be 0 or 1 but P(y) we want is 1 and the reverse is implicit where if we want P(y) = 0 then we do P(y) at 0 = 1 - P(y) at 1
+The function produced by the algorithm describes the probability of y being true (y=1) for a given value of x. Mathematically, you can express the function like this:
+
+
+f(x) = P(y=1 | x)
+f of x equals the probability that y equals 1, given x.
+What each part means (important)
+f(x)
+“The model’s output when input is x”
+In logistic regression, this output is a probability, not a class
+
+
+P( )
+Stands for probability
+
+
+y = 1
+The event we care about
+“The target belongs to class 1”
+
+
+| x
+Read as “given x”
+Means the probability is conditional on x
+
+
+So:
+P(y=1∣x)
+means:
+“Among all cases with input x, what is the probability that the label is 1?”
+
+
+The diagram also includes a horizontal line to indicate the threshold at which a model based on this function will predict true (1) or false (0). The threshold lies at the mid-point for y (P(y) = 0.5). For any values at this point or above, the model will predict true (1); while for any values below this point it will predict false (0).
+Since the model only gives out the prediction and not the actual decision we have to define a threshold above which we can ask to predict it as 1 and below which as 0. This threshold can vary based on use cases
+
+
+Binary classification evaluation metrics
+The first step in calculating evaluation metrics for a binary classification model is usually to create a matrix of the number of correct and incorrect predictions for each possible class label:
+  
+
+This visualization is called a confusion matrix, and it shows the prediction totals where:
+
+
+ŷ=0 and y=0: True negatives (TN)
+ŷ=1 and y=0: False positives (FP)
+ŷ=0 and y=1: False negatives (FN)
+ŷ=1 and y=1: True positives (TP)
+
+
+The True negative and True positive are on the diagonal of this matrix which can give a quick glance on the models accuracy based on the color intensity of the diagonal
+
+
+Accuracy → Correct Predictions upon all predictions
+The simplest metric you can calculate from the confusion matrix is accuracy - the proportion of predictions that the model got right
+
+
+It can be given as 
+(TN + TP) / (TN + FP + FN + TP)
+
+
+Accuracy might initially seem like a good metric to evaluate a model, but consider this. Suppose 11% of the population has diabetes. You could create a model that always predicts 0 (a dumb model), and it would achieve an accuracy of 89%, even though it makes no real attempt to differentiate between patients by evaluating their features. What we really need is a deeper understanding of how the model performs at predicting 1 for positive cases and 0 for negative cases.
+Basically accuracy fails when there is class imbalance in the dataset and may give high result despite it being not differentiate the classes itself.
+How lets dig deeper
+Lets say we have 100 people. 11 of them have diabetes and 89 of them do not have it. If we have a dumb model that predicts 0 for all the patients then the matrix will be like
+TP → 0 (y = 1 and y^ = 1)
+TN → 89 (y = 0 and y^ = 0)
+FP → 0 (y = 0 and y^ = 1)
+FN → 11 (y = 1 and y^ = 0)
+And so if you see the accuracy will be 89% which is completely dumb to say because all the model does is just predict as 0 for all the cases and still gets a n accuracy of 89%
+
+
+Recall →
+Recall is a metric that measures the proportion of positive cases that the model identified correctly. In other words, compared to the number of patients who have diabetes, how many did the model predict to have diabetes?
+
+
+Formula is TP / (TP + FN)
+
+
+Out of all people who actually have diabetes, how many did we detect?
+Recall focuses on False Negatives.
+High recall → few FN
+Low recall → many sick people missed
+
+
+Precision → Precision is a similar metric to recall, but measures the proportion of predicted positive cases where the true label is actually positive. In other words, what proportion of the patients predicted by the model to have diabetes actually have diabetes?
+
+
+Formula → TP / (TP + FP)
+Out of all people the model predicted as diabetic, how many actually are?
+Precision focuses on False Positives.
+High precision → few FP
+Low precision → many false alarms
+
+
+If you:
+Lower the threshold → predict more positives
+Recall ↑ (fewer FN)
+Precision ↓ (more FP)
+
+
+If you:
+Raise the threshold → predict fewer positives
+Precision ↑
+Recall ↓
+
+
+You usually can’t maximize both.
+Spam filter example:
+Recall: How many actual spam emails did we catch?
+Precision: Of the emails we marked as spam, how many were really spam?
+
+
+Medical test:
+Recall: Did we catch all sick patients?
+Precision: Are the diagnosed patients actually sick?
+
+
+F1 score → F1-score is an overall metric that combines recall and precision. The formula for F1-score is:
+
+
+2 x ((Precision x Recall) ÷ (Precision + Recall))
+
+
+The F1 score is the harmonic mean of precision and recall:
+Why does harmonic mean and not the normal average?
+Because we want a score that:
+Is high only if both precision and recall are high
+Drops sharply if either one is low
+
+
+So F1 doesn’t “balance” them — it forces agreement.
+Area Under the Curve (AUC)
+Another name for recall is the true positive rate (TPR), and there's an equivalent metric called the false positive rate (FPR) that is calculated as FP÷(FP+TN). We already know that the TPR for our model when using a threshold of 0.5 is 0.75, and we can use the formula for FPR to calculate a value of 0÷2 = 0.
+
+
+Of course, if we were to change the threshold above which the model predicts true (1), it would affect the number of positive and negative predictions; and therefore change the TPR and FPR metrics. These metrics are often used to evaluate a model by plotting a received operator characteristic (ROC) curve that compares the TPR and FPR for every possible threshold value between 0.0 and 1.0:
+  
+
+The ROC curve for a perfect model would go straight up the TPR axis on the left and then across the FPR axis at the top. Since the plot area for the curve measures 1x1, the area under this perfect curve would be 1.0 (meaning that the model is correct 100% of the time). In contrast, a diagonal line from the bottom-left to the top-right represents the results that would be achieved by randomly guessing a binary label; producing an area under the curve of 0.5. In other words, given two possible class labels, you could reasonably expect to guess correctly 50% of the time.
+
+
+In the case of our diabetes model, the curve above is produced, and the area under the curve (AUC) metric is 0.875. Since the AUC is higher than 0.5, we can conclude the model performs better at predicting whether or not a patient has diabetes than randomly guessing.
+
+
+The diagonal ROC line represents a random classifier where TPR increases at the same rate as FPR, giving an AUC of 0.5, meaning the model is no better than chance at distinguishing positive from negative cases — not that it is 50% accurate.
+
+
+Multiclass classification →
+Similar to binary classification but this time we have multiple labels. Lets say we have to distinguish the type of penguin, 0 → Adelie, 1 → Gentoo, 2 → Chinstrap
+Two algorithms are popular
+One vs Rest (OvR) algorithm →
+One-vs-Rest algorithms train a binary classification function for each class, each calculating the probability that the observation is an example of the target class. Each function calculates the probability of the observation being a specific class compared to any other class. For our penguin species classification model, the algorithm would essentially create three binary classification functions:
+f0(x) = P(y=0 | x)
+f1(x) = P(y=1 | x)
+f2(x) = P(y=2 | x)
+Each algorithm produces a sigmoid function that calculates a probability value between 0.0 and 1.0. A model trained using this kind of algorithm predicts the class for the function that produces the highest probability output.
+
+
+Multinomial Algorithm →
+As an alternative approach is to use a multinomial algorithm, which creates a single function that returns a multi-valued output. The output is a vector (an array of values) that contains the probability distribution for all possible classes - with a probability score for each class which when totaled add up to 1.0:
+
+
+f(x) =[P(y=0|x), P(y=1|x), P(y=2|x)]
+
+
+An example of this kind of function is a softmax function, which could produce an output like the following example:
+
+
+[0.2, 0.3, 0.5]
+
+
+The elements in the vector represent the probabilities for classes 0, 1, and 2 respectively; so in this case, the class with the highest probability is 2.
+
+
+Regardless of which type of algorithm is used, the model uses the resulting function to determine the most probable class for a given set of features (x) and predicts the corresponding class label (y).
+  
+
+
+
+Clustering
+Clustering is a form of unsupervised machine learning in which observations are grouped into clusters based on similarities in their data values, or features. This kind of machine learning is considered unsupervised because it doesn't make use of previously known label values to train a model. In a clustering model, the label is the cluster to which the observation is assigned, based only on its features.
+
+
+For example we have a dataset of vehicles and records say mode of transport, no of wheels, length and so on, these become the features and there are no labels in the dataset, just the features. The goal is not to identify the label but to group them into clusters based on the features
+We need the clustering but in many real world scenarios we do not know the labels and hence it is important to identify and make clusters based on their features
+Clustering is used when you’re exploring, not predicting
+
+
+Customer data (classic use case)
+Age
+Income
+Spending habits
+No label called “customer type”.
+Clustering reveals:
+Budget buyers
+Premium customers
+Occasional shoppers
+Then business teams act on those clusters.
+
+
+Clustering is used when labels are unknown or undefined, to discover natural groupings in data; classification is used when labels are already known and the goal is to predict them.
+
+
+
+
+Training a clustering model
+There are multiple algorithms you can use for clustering. One of the most commonly used algorithms is K-Means clustering, which consists of the following steps:
+
+
+The feature (x) values are vectorized to define n-dimensional coordinates (where n is the number of features). In the flower example, we have two features: number of leaves (x1) and number of petals (x2). So, the feature vector has two coordinates that we can use to conceptually plot the data points in two-dimensional space ([x1,x2])
+You decide how many clusters you want to use to group the flowers - call this value k. For example, to create three clusters, you would use a k value of 3. Then k points are plotted at random coordinates. These points become the center points for each cluster, so they're called centroids.
+Each data point (in this case a flower) is assigned to its nearest centroid.
+Each centroid is moved to the center of the data points assigned to it based on the mean distance between the points.
+After the centroid is moved, the data points may now be closer to a different centroid, so the data points are reassigned to clusters based on the new closest centroid.
+The centroid movement and cluster reallocation steps are repeated until the clusters become stable or a predetermined maximum number of iterations is reached.
+
+
+Evaluating a clustering model
+Since there's no known label with which to compare the predicted cluster assignments, evaluation of a clustering model is based on how well the resulting clusters are separated from one another.
+
+
+There are multiple metrics that you can use to evaluate cluster separation, including:
+
+
+Average distance to cluster center: How close, on average, each point in the cluster is to the centroid of the cluster.
+Average distance to another center: How close, on average, each point in the cluster is to the centroid of all other clusters.
+Maximum distance to cluster center: The furthest distance between a point in the cluster and its centroid.
+Silhouette: A value between -1 and 1 that summarizes the ratio of distance between points in the same cluster and points in different clusters (The closer to 1, the better the cluster separation).
+
+
+Deep Learning
+Deep learning is an advanced form of machine learning that tries to emulate the way the human brain learns. The key to deep learning is the creation of an artificial neural network that simulates electrochemical activity in biological neurons by using mathematical functions.
+
+
+Each neuron is a function that operates on an input value (x) and a weight (w). The function is wrapped in an activation function that determines whether to pass the output on.
+
+
+Artificial neural networks are made up of multiple layers of neurons - essentially defining a deeply nested function. This architecture is the reason the technique is referred to as deep learning and the models produced by it are often referred to as deep neural networks (DNNs). You can use deep neural networks for many kinds of machine learning problem, including regression and classification, as well as more specialized models for natural language processing and computer vision.
+
+
+Just like other machine learning techniques discussed in this module, deep learning involves fitting training data to a function that can predict a label (y) based on the value of one or more features (x). The function (f(x)) is the outer layer of a nested function in which each layer of the neural network encapsulates functions that operate on x and the weight (w) values associated with them. The algorithm used to train the model involves iteratively feeding the feature values (x) in the training data forward through the layers to calculate output values for ŷ, validating the model to evaluate how far off the calculated ŷ values are from the known y values (which quantifies the level of error, or loss, in the model), and then modifying the weights (w) to reduce the loss. The trained model includes the final weight values that result in the most accurate predictions.
+
+
+Lets take the penguin example where we have 4 features and we keep them in a vector 
+The feature vector for a penguin observation is fed into the input layer of the neural network, which consists of a neuron for each x value. In this example, the following x vector is used as the input: [37.3, 16.8, 19.2, 30.0]
+The functions for the first layer of neurons each calculate a weighted sum by combining the x value and w weight, and pass it to an activation function that determines if it meets the threshold to be passed on to the next layer.
+Each neuron in a layer is connected to all of the neurons in the next layer (an architecture sometimes called a fully connected network) so the results of each layer are fed forward through the network until they reach the output layer.
+The output layer produces a vector of values; in this case, using a softmax or similar function to calculate the probability distribution for the three possible classes of penguin. In this example, the output vector is: [0.2, 0.7, 0.1]
+The elements of the vector represent the probabilities for classes 0, 1, and 2. The second value is the highest, so the model predicts that the species of the penguin is 1 (Gentoo).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+AI in Microsoft Foundry
+Artificial Intelligence (AI) refers to systems designed to perform tasks that typically require human intelligence—such as reasoning, problem-solving, perception, and language understanding. Responsible AI: Emphasizes fairness, transparency, and ethical use of AI technologies.
+
+
+AI is the broader goal—creating systems that mimic human intelligence. Machine learning (ML) is the primary method we use to reach AI and is made possible by data-driven algorithms. In general, ML enables machines to learn patterns from data and improve performance without explicit programming.
+
+
+Types of ML:
+
+
+Supervised and Unsupervised Learning: such as regression (supervised) for predicting prices, classification (supervised) for spam detection, and clustering (unsupervised) for customer segmentation.
+Deep Learning: A specialized branch of ML using neural networks with multiple layers for tasks like image recognition and speech synthesis. Deep learning provides the foundation through neural networks that learn complex patterns from massive datasets.
+Generative AI: uses deep learning capabilities to create new content—text, images, audio, code—rather than just classify or predict outcomes.
+
+
+An AI application is a software solution that uses AI techniques—such as computer vision, speech, and information extraction—to perform tasks that typically require human-like intelligence. These applications can understand, reason, learn, and respond to inputs in a way that feels more adaptive and intelligent than traditional software.
+
+
+AI applications are:
+
+
+Model-powered: They use trained models to process inputs and generate outputs, such as text, images, or decisions.
+Dynamic: Unlike static programs, AI apps can improve over time through retraining or fine-tuning.
+Some of the typical ways people interact with AI applications include:
+
+
+Conversational Interfaces: Users interact via chatbots or voice assistants (such as: asking questions, getting recommendations).
+Embedded Features: AI is integrated into apps for tasks like autocomplete, image recognition, or fraud detection.
+Decision Support: AI applications provide insights or predictions to help users make informed choices (such as: personalized shopping, medical diagnostics).
+Automation: They handle repetitive tasks, such as document processing or customer service, reducing manual effort.
+Some examples of AI applications for different industries include:
+
+
+Healthcare: AI-powered diagnostic tools that analyze medical images (such as X-rays or MRIs) to help doctors detect diseases more accurately and quickly.
+Finance: Fraud detection systems that use AI to monitor transactions in real time and identify suspicious activity, helping prevent financial crimes.
+Retail: Personalized recommendation engines that analyze customer behavior and preferences to suggest products, improving the shopping experience.
+Manufacturing: Predictive maintenance solutions that use AI to monitor equipment and forecast when machines are likely to fail, reducing downtime and maintenance costs.
+Education: Intelligent tutoring systems that adapt to each student’s learning style and pace, providing customized feedback and support to enhance learning outcomes.
+
+
+Components of an AI application
+
+
+Data Layer
+The data layer is the foundation of any AI application. It includes the collection, storage, and management of data used for training, inference, and decision-making. Common data sources include structured databases such as Azure SQL and PostgreSQL, unstructured data, such as documents and images, and real-time streams. Azure services like Cosmos DB and Azure Data Lake are often used to store and manage large-scale datasets efficiently.
+
+
+Model Layer
+The model layer involves the selection, training, and deployment of machine learning or AI models. Models can be pretrained (for example: Azure OpenAI in Foundry Models) or custom-built using platforms like Azure Machine Learning. This layer also includes tools for fine-tuning, evaluating, and versioning models to ensure they meet performance and accuracy requirements. Microsoft Foundry, a unified Azure platform-as-a-service for enterprise AI operations, provides a comprehensive model catalog for application developers.
+
+
+Compute Layer
+AI applications require compute resources to train and run models.
+
+
+Integration & Orchestration Layer
+The integration and orchestration layer connects models and data with business logic and user interfaces.
