@@ -1,0 +1,90 @@
+﻿Git Commands Cheat Sheet
+
+
+Check Status
+git status → Checks the status, it shows whats modified, whats staged, whats untracked
+
+
+Initialize a Repo once per project
+git init → 
+
+
+Add files to Staging
+Add specific file → git add path/to/file
+Add a folder → git add folder
+Add everything → git add .
+
+
+Remove file from Staging
+To remove the file from commit
+git restore --staged path/to/file
+
+
+Commit Changes
+git commit -m “Message for the commit”
+
+
+Rename branch to main
+git branch -M main
+
+
+Connect local repo to Github
+This is a one time activity
+git remote add origin https://github.com/username/reponame.git
+
+
+Check remotes
+git remote -v
+
+
+Push to Github
+git push
+
+
+Undo Last Commit
+Before Push
+git reset -- soft HEAD~1
+Unstage Change
+git reset HEAD~1
+
+
+Discard Local Change
+git checkout -- path/to/file
+
+
+View Commit
+git log or git log --online
+Working Directory → Staging Area → Commit → GitHub
+
+
+Commands and their motion
+git add → Working to Staging
+git restore –staged → Staging to Working
+git commit → Staging to Commit
+git push → Commit to GitHub
+
+
+Working Directory
+Your actual files
+You edit code here
+
+
+Staging Area (aka Index)
+A preview of what will go into the next commit
+You explicitly choose files
+
+
+Commit
+A permanent snapshot
+Saved in Git history
+
+
+Branch
+A branch is an independent line of work.
+
+
+It lets you:
+Experiment
+Add features
+Fix bugs
+without breaking stable code.
