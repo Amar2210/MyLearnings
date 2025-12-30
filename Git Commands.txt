@@ -88,3 +88,6 @@ Experiment
 Add features
 Fix bugs
 without breaking stable code.
+
+Tiny Vim survival rule (remember this forever)
+Esc → :wq → Enter = “save and get me out”
